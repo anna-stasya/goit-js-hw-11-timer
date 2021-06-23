@@ -16,16 +16,19 @@ class CountdownTimer {
     start() {
         let startTime = this.targetDate.getTime();
         const TIMER = 1000;
-
+        
         setInterval(() => {
-            const currentTime = Date.now();
-            const deltaTime = startTime - currentTime;
-            const countdown = this.getTimeComponents(deltaTime);
+            if (startTime <= Date.now()) {
+                return;
+
+            } else {
+                const currentTime = Date.now();
+                const deltaTime = startTime - currentTime;
+                const countdown = this.getTimeComponents(deltaTime);
             
-            this.updateClockFace(countdown);
-            
-        }, TIMER);
-    }
+                this.updateClockFace(countdown);   
+        }}, TIMER)};
+        
 
     //интерфейс
     updateClockFace({ days, hours, mins, secs }) {
